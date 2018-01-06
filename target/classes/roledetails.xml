@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RoleDetails" >
+	<resultMap type="com.linshare.admin.dto.RoleDetailsDTO" id="userResult" />
+	<parameterMap type="com.linshare.admin.dto.RoleDetailsDTO" id="paramMap"></parameterMap>
+	
+	<select id="selectAllRoles" resultMap="userResult">
+		select rd.id, rd.roleName, rd.description from roledetails as rd where rd.isActive = 1
+	</select>
+		
+	<insert id="insertRoles" parameterMap="paramMap" useGeneratedKeys="true" keyProperty="id">
+		INSERT into roledetails(roleName,shortName,description, isActive) 
+		VALUES(#{roleName}, #{shortName}, #{description}, #{isActive})
+	</insert>
+	
+	<insert id="insertIntoMapping" parameterMap="paramMap">
+		INSERT into mappingusergrouprole(usergroupId,roleId) 
+		VALUES(#{usergroupId}, #{id}) 	    
+	</insert>
+	
+	<select id="getGroupIds" resultMap="userResult" parameterType="java.util.List">
+		SELECT cd.roleName, mrc.usergroupId,mrc.roleId from mappingusergrouprole AS mrc 
+		JOIN roledetails AS cd 
+		ON cd.id = mrc.roleId
+		WHERE mrc.usergroupId IN
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+</mapper>

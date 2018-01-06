@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RoleDetails" >
+	<resultMap type="com.linshare.admin.dto.RoleDetailsDTO" id="userResult" />
+	<parameterMap type="com.linshare.admin.dto.RoleDetailsDTO" id="paramMap"></parameterMap>
+	
+	<select id="selectAllUser" resultMap="userResult">
+	</select>
+	
+	<select id="selectbyUser" resultMap="userResult">
+	</select>
+	
+	<update id="delteUser" parameterMap="paramMap" parameterType="int">
+	</update>
+	
+	<insert id="insertRoles" parameterMap="paramMap" useGeneratedKeys="true" keyProperty="id">
+		INSERT into roledetails(roleName,shortName,description, isActive) 
+		VALUES(#{roleName}, #{shortName}, #{description}, #{isActive})
+	</insert>
+</mapper>

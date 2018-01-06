@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Capability" >
+	<resultMap type="com.linshare.admin.dto.CapabilityDTO" id="userResult"/>
+	<parameterMap type="com.linshare.admin.dto.CapabilityDTO" id="paramMap" />
+	<insert id="insertCapability" parameterMap="paramMap">
+		INSERT into capabilitiesdetails(name,shortName,description, isActive) 
+		VALUES(#{name}, #{shortName}, #{description}, #{isActive}) 	    
+	</insert>
+	
+	<select id="selectAll" resultMap="userResult">
+		SELECT * FROM capabilitiesdetails
+	</select>
+	
+	<select id="select" resultMap="userResult">
+		SELECT * FROM capabilitiesdetails WHERE id =#{id}
+	</select>
+	
+	<delete id="deleteCap" parameterType="int">
+		DELETE FROM capabilitiesdetails WHERE id =#{id}  	    
+	</delete>
+	
+	<update id="updateCap" parameterMap="paramMap" parameterType="int">
+		UPDATE capabilitiesdetails SET
+		name=#{name}, shortName=#{shortName}, description=#{description}, isActive=#{isActive} WHERE id =#{id}
+	</update>
+	
+	<insert id="insertIntoMapping" parameterMap="paramMap">
+		INSERT into mappingrolecapabilities(roleId,capabilitiesId) 
+		VALUES(#{roleId}, #{capabilitiesId}) 	    
+	</insert>
+	
+	<select id="getCapIds" resultMap="userResult" parameterType="java.util.List">
+		SELECT cd.name, mrc.capabilitiesId,mrc.roleId from mappingrolecapabilities AS mrc 
+		JOIN capabilitiesdetails AS cd 
+		ON cd.id = mrc.capabilitiesId
+		WHERE mrc.roleId IN
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+</mapper>

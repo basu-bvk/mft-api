@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Appliction" >
+	<resultMap type="com.linshare.admin.dto.ApplicationDetailsDTO" id="resultMap"/>
+	<parameterMap type="com.linshare.admin.dto.ApplicationDetailsDTO" id="paramMap"></parameterMap>
+	
+	<select id="getByUserIds" resultMap="resultMap" parameterType="java.util.List">
+		SELECT mua.userid, ad.appName, rd.roleName, mua.approvalStatus FROM mappinguserapplcation as mua
+		JOIN applicationdetails AS ad
+		ON ad.id = mua.applicationId
+		JOIN roledetails AS rd
+		ON rd.id = mua.roleId
+		WHERE ad.isActive = 1 AND rd.isActive = 1 AND mua.userid in 
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select>
+	
+	<insert id="insertIntoMapping" parameterMap="paramMap" useGeneratedKeys="true" keyProperty="id">
+	INSERT INTO mappinguserapplcation(userId,applicationId,roleId,approvalStatus)
+	VALUES(#{userId},#{applicationId},#{roleId},#{approvalStatus})
+	</insert>
+</mapper>

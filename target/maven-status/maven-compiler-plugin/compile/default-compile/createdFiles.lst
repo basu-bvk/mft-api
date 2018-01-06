@@ -1,0 +1,14 @@
+com\linshare\admin\dto\UserManageDTO.class
+com\linshare\admin\dao\ApplicationDetailsDAO.class
+com\linshare\admin\services\MyBatisUtil.class
+com\linshare\admin\controller\RoleDetailsController.class
+com\linshare\admin\services\UserManageService.class
+com\linshare\admin\services\RoleDetailsService.class
+com\linshare\admin\dto\RoleDetailsDTO.class
+com\linshare\admin\dao\CapabilityDAO.class
+com\linshare\admin\dto\ApplicationDetailsDTO.class
+com\linshare\admin\dao\UserManageDAO.class
+com\linshare\admin\dto\CapabilityDTO.class
+com\linshare\admin\controller\UserManageController.class
+com\linshare\admin\dao\RoleDetailsDAO.class
+com\linshare\admin\controller\CapabilityController.class

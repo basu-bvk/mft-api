@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GroupDetails" >
+	<resultMap type="com.linshare.admin.dto.GroupDetailsDTO" id="userResult" />
+	<parameterMap type="com.linshare.admin.dto.GroupDetailsDTO" id="paramMap"></parameterMap>
+	
+	<select id="selectAllGroup" resultMap="userResult">
+		select rd.id, rd.name, rd.description from usergroupdetails as rd where rd.isActive = 1
+	</select>
+		
+	<insert id="insertGroups" parameterMap="paramMap" useGeneratedKeys="true" keyProperty="id">
+		INSERT into usergroupdetails(name,shortName,description, isActive) 
+		VALUES(#{name}, #{shortName}, #{description}, #{isActive})
+	</insert>
+</mapper>
