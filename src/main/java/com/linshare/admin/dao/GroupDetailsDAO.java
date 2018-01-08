@@ -18,4 +18,8 @@ public class GroupDetailsDAO {
 		return groupList;
 	}
 
+	public void deleteGroup(String id, SqlSession session) {
+		session.update("GroupDetails.deleteGroup", id);
+	}
+
 }

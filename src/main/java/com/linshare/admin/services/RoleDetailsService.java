@@ -58,4 +58,10 @@ public class RoleDetailsService {
 		}
 		return roleList;
 	}
+
+	public void deleteRoles(String id) {
+		roleDetailsDAO.deleteRole(id,session);
+		session.commit();
+		session.close();
+	}
 }

@@ -23,7 +23,7 @@ public class CapabilityController {
 		return "Inserted successfully";
 	}
 
-	@RequestMapping(value = "/Delete", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/Delete", method = RequestMethod.POST)
 	public String delete(@RequestBody String id) {
 		capabilityDAO.deleteCap(id);
 		return "Deleted successfully";

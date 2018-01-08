@@ -31,7 +31,7 @@ public class CapabilityDAO {
 	}
 	
 	public void deleteCap(String id) {
-		session.delete("Capability.deleteCap", id);
+		session.update("Capability.deleteCap", id);
 		session.commit();
 		session.close();
 	}

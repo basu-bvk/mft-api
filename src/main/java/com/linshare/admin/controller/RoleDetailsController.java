@@ -16,7 +16,7 @@ public class RoleDetailsController {
 
 	RoleDetailsService roleDetailsService = new RoleDetailsService();
 
-	@RequestMapping(value = "/InsertUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/InsertRoles", method = RequestMethod.POST)
 	public String insertUser(@RequestBody RoleDetailsDTO roleDetailsDTO) {
 		roleDetailsService.insertRoles(roleDetailsDTO);
 		return "Inserted successfully";
@@ -27,4 +27,11 @@ public class RoleDetailsController {
 		List<RoleDetailsDTO> roles = roleDetailsService.selectAllRoles();
 		return roles;
 	}
+	
+	@RequestMapping(value = "/DeleteRoles", method = RequestMethod.POST)
+	public String insertUser(@RequestBody String id) {
+		roleDetailsService.deleteRoles(id);
+		return "Deleted successfully";
+	}
+
 }

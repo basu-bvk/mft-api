@@ -8,17 +8,18 @@
 	<parameterMap type="com.linshare.admin.dto.UserManageDTO" id="paramMap"></parameterMap>
 	
 	<select id="selectAllUser" resultMap="userResult">
-	    SELECT ud.id, ud.firstName, ud.lastName, ud.userName, (SELECT dd.divName FROM divisiondetails as dd where dd.id = ud.divisionId)
-	     as divisionName, ud.updatedby, ud.updatedon from userdetails as ud;
+	    SELECT ud.id, ud.firstName, ud.lastName, ud.userName, 
+		(SELECT dd.divName FROM divisiondetails as dd where dd.id = ud.divisionId)
+		as divisionName, ud.updatedby, ud.updatedon from userdetails as ud where ud.isActive=1 and isDeleted=0
 	</select>
 	
 	<select id="selectbyUser" resultMap="userResult">
 		SELECT ud.id, ud.firstName, ud.lastName, ud.userName, (SELECT dd.divName FROM divisiondetails as dd where dd.id = ud.divisionId)
-	     as divisionName, ud.updatedby, ud.updatedon from userdetails as ud where ud.id=#{ud.id};
+	     as divisionName, ud.updatedby, ud.updatedon from userdetails as ud where ud.id=#{ud.id} and ud.isActive=1 and isDeleted=0
 	</select>
 	
 	<update id="delteUser" parameterMap="paramMap" parameterType="int">
-		UPDATE userdetails SET isDeleted=1 WHERE id=#{id}
+		UPDATE userdetails SET isActive=0, isDeleted=1 WHERE id=#{id}
 	</update>
 	
 	<insert id="insertUser" parameterMap="paramMap" useGeneratedKeys="true" keyProperty="id">

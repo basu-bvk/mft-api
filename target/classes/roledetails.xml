@@ -20,11 +20,15 @@
 		VALUES(#{usergroupId}, #{id}) 	    
 	</insert>
 	
+	<update id="deleteRoles" parameterType="int">
+		update roledetails set isActive=0 WHERE id =#{id}  	    
+	</update>
+	
 	<select id="getGroupIds" resultMap="userResult" parameterType="java.util.List">
 		SELECT cd.roleName, mrc.usergroupId,mrc.roleId from mappingusergrouprole AS mrc 
 		JOIN roledetails AS cd 
 		ON cd.id = mrc.roleId
-		WHERE mrc.usergroupId IN
+		WHERE cd.isActive=1 and mrc.usergroupId IN
 		<foreach collection="list" item="id" open="(" separator="," close=")">
 			#{id}
 		</foreach>

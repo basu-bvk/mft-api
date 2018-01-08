@@ -11,20 +11,20 @@
 	</insert>
 	
 	<select id="selectAll" resultMap="userResult">
-		SELECT * FROM capabilitiesdetails
+		SELECT * FROM capabilitiesdetails where isActive=1
 	</select>
 	
 	<select id="select" resultMap="userResult">
-		SELECT * FROM capabilitiesdetails WHERE id =#{id}
+		SELECT * FROM capabilitiesdetails WHERE id =#{id} and where isActive=1
 	</select>
 	
-	<delete id="deleteCap" parameterType="int">
-		DELETE FROM capabilitiesdetails WHERE id =#{id}  	    
-	</delete>
+	<update id="deleteCap" parameterType="int">
+		update capabilitiesdetails set isActive=0 WHERE id =#{id}  	    
+	</update>
 	
 	<update id="updateCap" parameterMap="paramMap" parameterType="int">
 		UPDATE capabilitiesdetails SET
-		name=#{name}, shortName=#{shortName}, description=#{description}, isActive=#{isActive} WHERE id =#{id}
+		name=#{name}, shortName=#{shortName}, description=#{description}, isActive=#{isActive} WHERE id =#{capabilitiesId}
 	</update>
 	
 	<insert id="insertIntoMapping" parameterMap="paramMap">

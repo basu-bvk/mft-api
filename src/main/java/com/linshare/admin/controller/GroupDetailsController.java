@@ -28,4 +28,10 @@ public class GroupDetailsController {
 		List<GroupDetailsDTO> groups = groupDetailsService.selectAllGroups();
 		return groups;
 	}
+	
+	@RequestMapping(value = "/DeleteGroups", method = RequestMethod.POST)
+	public String insertGroups(@RequestBody String id) {
+		groupDetailsService.deleteGroups(id);
+		return "Deleted successfully";
+	}
 }

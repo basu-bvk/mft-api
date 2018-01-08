@@ -27,7 +27,7 @@ public class UserManageController {
 		return user1;
 	}
 
-	@RequestMapping(value = "/IsDeleteByUserId", method = RequestMethod.POST)
+	@RequestMapping(value = "/DeleteByUserId", method = RequestMethod.POST)
 	public String deleteUser(@RequestBody String id) {
 		userManageService.isDeleteByUserId(id);
 		return "Marked isDelete as 1 successfully";

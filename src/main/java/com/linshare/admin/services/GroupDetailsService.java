@@ -57,4 +57,8 @@ public class GroupDetailsService {
 		}
 		return groupList;
 	}
+
+	public void deleteGroups(String id) {
+		groupDetailsDAO.deleteGroup(id,session);
+	}
 }

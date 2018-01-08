@@ -26,4 +26,8 @@ public class RoleDetailsDAO {
 		List<RoleDetailsDTO> roleList=session.selectList("RoleDetails.getGroupIds", groupids);
 		return roleList;
 	}
+
+	public void deleteRole(String id, SqlSession session) {
+		session.update("RoleDetails.deleteRoles", id);
+	}
 }

@@ -14,4 +14,8 @@
 		INSERT into usergroupdetails(name,shortName,description, isActive) 
 		VALUES(#{name}, #{shortName}, #{description}, #{isActive})
 	</insert>
+	
+	<update id="deleteGroup" parameterType="int">
+		update usergroupdetails set isActive=0 WHERE id =#{id}  	    
+	</update>
 </mapper>
